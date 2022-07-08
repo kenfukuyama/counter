@@ -16,6 +16,40 @@
             <div class="p-4"><a class="btn btn-info" href="/count">Click</a></div>
             <div class="p-4"><a class="btn btn-danger" href="/clear">Reset</a></div>
         </div>
+
+        <div><h2>Welcome to the Great Number Game</h2></div>
+        <div>I am thinking of a number between 1 to 100</div>
+
+        {% if 'numberGuessed' in session %}
+            {% if  session['numberGuessed'] == session['answer_key'] %}
+                <div class="d-flex justify-content-center m-2">
+                    <p class="bg-success text-light w-25">Correct!</p>
+                </div>
+                <div class="p-4"><a class="btn btn-info" href="/clear">Play Again!</a></div>
+            
+            {% elif session['numberGuessed'] > session['answer_key']  %}
+                <div class="d-flex justify-content-center m-2">
+                    <p class="bg-primary text-light w-25">too high!</p>
+                </div>
+            {% else %}
+                <div class="d-flex justify-content-center m-2">
+                    <p class="bg-danger text-light w-25">too low!</p>
+                </div>
+            {% endif %}
+            <p>{{session['numberGuessed']}}, {{session['answer_key']}}</p>
+        {% endif %}
+
+
+        
+
+        <form action="/guessSubmit" method="post">
+            <div class="mt-3 form-group">
+                <label class="mb-2" for="guess">Guess</label>
+                <input type="text" class="form-control" name="guessN" id="guessNum" placeholder="Number between 1 and 100">
+                <input type="submit" class="mt-3 bg-info p-2 text-light" value="Guess the Number">
+            </div>
+        </form>
+        
     </div>
 </body>
 </html>
